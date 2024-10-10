@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: darkslategray;
+    }
+    #Menu {
+        background-color: skyblue;
+        padding: 3px;
+        width: 1360px;
+        height: 70px;
+    } 
+    #butt {
+        position: relative;
+        bottom: 120px;
+        margin-left: 1200px;
+        padding: 3px;
+        border: 0.5px solid blue;
+        border-radius: 50px;
+        background-color: skyblue;
+        color: white;
+        width: 150px;
+        height: 40px;
+        font-size: 24px;
+    }   
+    #mag1 {
+        padding: 3px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-left: 38px;
+        margin-top: 3.5px;
+    }
+    #nam {
+        position: relative;
+        left: 110px;
+        bottom: 70px;
+        color: white;
+        width: 800px;
+        font-size: 20px;
+        font-weight: bolder;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    #chatspace {
+        padding: 3px;
+        width: 1349px;
+        height: 470px;
+        background-color: darkslategray;
+        overflow-y: auto;
+    }
+    .message {
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        width: fit-content;
+        max-width: 60%;
+        display: flex;
+        align-items: center;
+    }
+    .message.sent {
+        background-color: lightgreen;
+        align-self: flex-end;
+        margin-left: auto;
+        flex-direction: row-reverse;
+    }
+    .message.received {
+        background-color: lightgray;
+        align-self: flex-start;
+        margin-right: auto;
+    }
+    .sender {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: blue;
+    }
+    .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin: 5px;
+    }
+    #mst {
+        width: 90%;
+        height: 45px;
+        border-radius: 50px;
+        font-size: 24px;
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+    }
+    #send {
+        font-size: 30px;
+        color: blue;
+        vertical-align: middle;
+        position: fixed;
+        bottom: 10px;
+        right: 20px;
+    }
+    /* Media query for tablets (768px and below) */
+@media (max-width: 768px) {
+    #Menu {
+        height: 60px;
+    }
+
+    #butt {
+        bottom: 100px;
+        margin-left: calc(100% - 180px); /* Adjust button position for smaller screens */
+        width: 130px;
+        font-size: 20px;
+    }
+
+    #nam {
+        font-size: 18px;
+        left: 80px;
+        bottom: 60px;
+    }
+
+    #chatspace {
+        height: 400px;
+    }
+
+    #mst {
+        height: 40px;
+        font-size: 22px;
+    }
+
+    #send {
+        font-size: 28px;
+        bottom: 5px;
+    }
+}
+
+/* Media query for mobile phones (480px and below) */
+@media (max-width: 480px) {
+    #Menu {
+        height: 200px;
+    }
+
+    #mag1 {
+        width: 150px;
+        height: 150px;
+        margin-top: 20px;
+        margin-left: 30px;
+    }
+
+    #butt {
+        font-size: 24px;
+        bottom: 90px;
+        margin-left: calc(90% - 150px); /* Adjust button for mobile screens */
+        position: relative;
+        bottom: 270px;
+        width: 250px;
+        height: 120px;
+        font-size: 18px;
+    }
+
+    #nam {
+        font-size: 30px;
+        left: 220px;
+        bottom: 145px;
+        width: 700px;
+    }
+
+    #chatspace {
+        height: 350px;
+    }
+
+    #mst {
+        height: 130px;
+        font-size: 100px;
+        width: 85%;
+    }
+
+    #send {
+        font-size: 50px;
+        bottom: 5px;
+        height: 100px;
+
+    }
+}
+</style>
+<body>
+    <div id="Menu">
+        <img id="mag1" src="School.jpg"> 
+        <p id="nam">SS3 Ambassador Regina Ceali School 2023/2024 Community</p>
+        <button id="butt">Logout</button>
+    </div>
+    <div id="chatspace" class="chatspace"></div>
+    <input id="mst" type="text" placeholder="Message">
+    <button id="send"><i class="material-icons">send</i></button>
+
+    <script type="module">
+        // Import Firebase SDK
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+        import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBvBF0xbdnJwVSEMvcfm8v0k7iahWFkZao",
+            authDomain: "school-data-49ed5.firebaseapp.com",
+            projectId: "school-data-49ed5",
+            storageBucket: "school-data-49ed5.appspot.com",
+            messagingSenderId: "573140505990",
+            appId: "1:573140505990:web:64d799ad31424e76ea0807",
+            measurementId: "G-VKG5K2V2PN",
+            databaseURL: "https://school-data-49ed5-default-rtdb.firebaseio.com/"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const database = getDatabase(app);
+        const chatRef = ref(database, 'chats');
+
+        // Handle user authentication and load messages
+        let currentUser = null;
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                loadMessages();
+            } else {
+                window.location.href = "login.html";
+            }
+        });
+
+        // Display messages in chat space
+        const chatspace = document.getElementById("chatspace");
+
+        function loadMessages() {
+            onChildAdded(chatRef, (snapshot) => {
+                const messageData = snapshot.val();
+                displayMessage(messageData.username, messageData.message, messageData.email);
+            });
+        }
+
+        function displayMessage(username, message, email) {
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add("message");
+
+            // Check if it's the current user's message or someone else's
+            if (email === currentUser.email) {
+                messageDiv.classList.add("sent");
+            } else {
+                messageDiv.classList.add("received");
+            }
+
+            // Avatar
+            const avatar = document.createElement("img");
+            avatar.src = "https://via.placeholder.com/40"; // Placeholder image, replace with user profile picture
+            avatar.classList.add("avatar");
+
+            // Message content
+            const content = document.createElement("div");
+            const sender = document.createElement("p");
+            sender.classList.add("sender");
+            sender.textContent = username;
+
+            const text = document.createElement("p");
+            text.textContent = message;
+
+            content.appendChild(sender);
+            content.appendChild(text);
+
+            // Add elements to messageDiv
+            messageDiv.appendChild(avatar);
+            messageDiv.appendChild(content);
+
+            // Append message to chatspace
+            chatspace.appendChild(messageDiv);
+
+            // Scroll to the bottom
+            chatspace.scrollTop = chatspace.scrollHeight;
+        }
+
+        // Send message on button click
+        document.getElementById("send").addEventListener("click", () => {
+            const messageInput = document.getElementById("mst");
+            const messageText = messageInput.value;
+
+            if (messageText && currentUser) {
+                push(chatRef, {
+                    username: currentUser.email.split("@")[0], // Get the name part of the email
+                    message: messageText,
+                    email: currentUser.email // Save email for identification
+                });
+                messageInput.value = '';
+            }
+        });
+
+        // Logout button functionality
+        document.getElementById("butt").addEventListener("click", () => {
+            signOut(auth).then(() => {
+                alert("Logged out successfully!");
+                window.location.href = "login.html";
+            }).catch((error) => {
+                console.error("Logout error:", error);
+            });
+        });
+
+        
+    </script>
+</body>
+</html>

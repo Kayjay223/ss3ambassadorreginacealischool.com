@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+   body{
+        padding: 0px;
+        margin: 0px;
+        background-color: aquamarine;
+        flex-wrap: wrap;
+    }
+    img{
+        padding: 0;
+        height: 607px;
+        width: 674.5px;
+        animation-name: moves;
+        animation-duration: 4s;
+    }
+    
+    .overall{
+        height: 570px;
+        display: flex;
+    }
+    .form{
+        padding: 40px;
+        margin: 0px;
+        margin-top: 150px;
+        height: 280px;
+        width: 674.5px;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        left: 70;
+
+    }
+    #log1{
+        margin-right: 285px;
+        font-size: 24px;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        animation-name: move;
+        animation-duration: 4.5s; 
+    }
+    #log2{
+        padding: auto;
+        height: 35px;
+        font-size: 17px;
+        font-family: Arial, Helvetica, sans-serif;
+        font: caption;
+        width: 350px;
+        margin-top: 10px;
+        border-radius: 10px;
+        border: 1px solid black;
+        animation-name: move1;
+        animation-duration: 4s;
+    }
+    #log3{
+        margin-right: 235px;
+        font-size: 24px;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        animation-name: move2;
+        animation-duration: 3.5s;
+    }
+    #log4{
+        padding: auto;
+        height: 35px;
+        font-size: 17px;
+        font-family: Arial, Helvetica, sans-serif;
+        font: caption;
+        width: 350px;
+        margin-top: 10px;
+        border-radius: 10px;
+        border: 1px solid black;
+        animation-name: move3;
+        animation-duration: 3s;
+    }
+    #log5{
+        margin-right: 235px;
+        font-size: 24px;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        animation-name: move4;
+        animation-duration: 2.5s;
+    }
+    #log6{
+        padding: auto;
+        height: 35px;
+        font-size: 17px;
+        font-family: Arial, Helvetica, sans-serif;
+        font: caption;
+        width: 350px;
+        margin-top: 10px;
+        border-radius: 10px;
+        border: 1px solid black;
+        animation-name: move5;
+        animation-duration: 2s;
+    }
+    #aref{
+        margin-left: 200px;
+        animation-name: move6;
+        animation-duration: 1.5s;
+    }
+    .form button{
+        padding: auto;
+        height: 35px;
+        width: 350px;
+        margin-top: 10px;
+        color: white;
+        font-size: 17px;
+        border-radius: 10px;
+        border: 1px solid black;
+        background-color: blue;
+        animation-name: move7;
+        animation-duration: 1s;
+    }
+    h1{
+        font-size: 24px;
+        font-family: Arial, Helvetica, sans-serif;
+        font: bold;
+        animation-name: move8;
+        animation-duration: 4.8s;
+    }
+    @keyframes move8{
+        from{
+            transform: translatey(-1000%);
+        }
+    }
+    @keyframes move{
+        from{
+            transform: translatey(-1000%);
+        }
+    }
+    @keyframes move1{
+        from{
+            transform: translatey(-1000%);
+        }
+    }
+    @keyframes move2{
+        from{
+            transform: translatey(-1000%);
+        }
+    }
+    @keyframes move3{
+        from{
+            transform: translatey(-1000%);
+        }
+    }
+    @keyframes move4{
+        from{
+            transform: translatey(-1000%);
+        }
+    }
+    @keyframes move5{
+        from{
+            transform: translatey(-1000%);
+        }
+    }
+    @keyframes move6{
+        from{
+            transform: translatey(-1000%);
+        }
+    }
+    @keyframes move7{
+        from{
+            transform: translatey(-1000%);
+        }
+    }
+    @keyframes moves{
+        from{
+            transform: translateX(-1000%);
+        }
+    }
+    /* Media Query for Tablet */
+    @media (max-width: 768px) {
+        img {
+            width: 50%;
+            height: auto;
+        }
+        .form {
+            width: 100%;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        #log1, #log3 {
+            margin-right: 0;
+            font-size: 20px;
+        }
+        #log2,#log6 {
+            width: 80%;
+            font-size: 16px;
+        }
+        .form button {
+            width: 80%;
+            font-size: 16px;
+        }
+        #aref {
+            margin-left: 0;
+            font-size: 14px;
+        }
+        h1 {
+            font-size: 22px;
+        }
+    }
+
+    /* Media Query for Mobile */
+    @media (max-width: 600px) {
+        .overall {
+            flex-direction: column;
+            width: 371px;
+        }
+        img {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            left: 39%;
+            top: 8%;
+        }
+        .form {
+            width: 60%;
+            padding: 10px;
+            margin-top: 40px;
+            position: relative;
+            left: 20%;
+        }
+        #log1, #log3 {
+            font-size: 18px;
+        }
+        #log2, #log6 {
+            width: 90%;
+            font-size: 15px;
+        }
+        .form button {
+            width: 90%;
+            font-size: 15px;
+        }
+        #aref {
+            margin-left: 0;
+            font-size: 12px;
+        }
+        h1 {
+            font-size: 20px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="overall">
+        <img src='School.jpg'>
+        <form id="loginForm">
+            <div class="form">
+                <h1><center>Welcome to SS3 Ambassador Regina Ceali School 2023/2024</center></h1>
+                <label id="log1">Email</label><br>
+                <input id="log2" type="email" required/><br>
+                <label id="log5">Password</label><br>
+                <input id="log6" type="password" required/><br>
+                <a id="aref" href="reset_password.html">Forgot password?</a><br>
+                <button type="submit" id="butt">Login</button>
+                <button  onclick="GO()" style="background-color: blue; width: 250px;"><center>I have not Sign up</center></button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function GO() {
+            window.location.href = "Register.html"
+        }
+    </script>
+    <script type="module">
+        // Import Firebase SDK
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBvBF0xbdnJwVSEMvcfm8v0k7iahWFkZao",
+            authDomain: "school-data-49ed5.firebaseapp.com",
+            projectId: "school-data-49ed5",
+            storageBucket: "school-data-49ed5.appspot.com",
+            messagingSenderId: "573140505990",
+            appId: "1:573140505990:web:64d799ad31424e76ea0807",
+            measurementId: "G-VKG5K2V2PN"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+
+        // Handle login
+        const loginForm = document.getElementById("loginForm");
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById("log2").value;
+            const password = document.getElementById("log6").value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert("Login successful! Welcome " + userCredential.user.email);
+                    window.location.href = "Chat Community.html"; // Redirect to chat community
+                })
+                .catch((error) => {
+                    if (error.code === 'auth/user-not-found') {
+                        alert("Error: User not found, please sign up.");
+                    } else if (error.code === 'auth/wrong-password') {
+                        alert("Error: Wrong password. Please try again.");
+                    } else {
+                        alert("Error: " + error.message);
+                    }
+                });
+        });
+    </script>
+</body>
+</html>
